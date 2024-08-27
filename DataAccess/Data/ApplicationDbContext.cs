@@ -20,8 +20,8 @@ namespace eTickets.DataAccess.Data
         {
             modelBuilder.Entity<Actor_Movie>().HasKey(am => new
             {
-                am.ActorId,
-                am.MovieId
+                am.MovieId,
+                am.ActorId
             });
 
             modelBuilder.Entity<Actor_Movie>().HasOne(m => m.Movie).WithMany(am => am.Actor_Movies).HasForeignKey(m => m.MovieId);

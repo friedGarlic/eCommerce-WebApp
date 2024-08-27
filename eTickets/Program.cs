@@ -28,7 +28,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Actor}/{action=Actors}/{id?}");
 
 //seed database
 ApplicationDBInitializer.Seed(app);

@@ -33,8 +33,8 @@ namespace eTickets.DataAccess.Data
                         {
                            Name = "Marvel Cinematic Universe", //other properties are not nullable so they need to be intialize
                            Description = "Movie about superheroes shit that disney or sony or any milking companies.",
-                           Logo = "https://cdn.vectorstock.com/i/1000v/38/76/cinema-logo-movie-emblem-template-vector-19873876.jpg"
-
+                           Logo = "https://cdn.vectorstock.com/i/1000v/38/76/cinema-logo-movie-emblem-template-vector-19873876.jpg",
+                           
                         }
                     });
                     context.SaveChanges();
