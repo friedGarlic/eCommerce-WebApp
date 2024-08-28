@@ -1,5 +1,6 @@
 ﻿using eTickets.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
@@ -12,9 +13,11 @@ namespace eTickets.Controllers
             _dbContext = dbContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Cinemas()
         {
-            return View();
+            var cineLists = await _dbContext.Cinemas.ToListAsync();
+
+            return View(cineLists);
         }
     }
 }

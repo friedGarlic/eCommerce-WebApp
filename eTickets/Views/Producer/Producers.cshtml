@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Actor>
-
+﻿@model IEnumerable<Producer>
 
 <div class="row">
 
@@ -17,14 +16,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var i in Model)
+                @foreach (var i in Model)
                 {
-                    <tr>
+                    <tr class="text-center">
                         <td class="align-middle">
                             <img class="rounded-circle" src="@i.ProfilePictureUrl" style="max-width: 150px" />
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor( e => i.FullName)
+                            @Html.DisplayFor(e => i.FullName)
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(e => i.Bio)
