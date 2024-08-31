@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Movie>
+
+<style>
+    .Image-Size{
+        width: 14rem;
+        height: 20rem;
+    }
+    .font-size-sm{
+        font-size: 1rem;
+    }
+    .stylized-p-border{
+        border: .1rem solid black;
+        border-radius: 5px;
+        padding: 1px;
+    }
+</style>
+<div class="row"> 
+    @foreach(var item in Model)
+    {
+        @* TODO add scss hover design in every card to show more information(descriptn, enddate) *@
+        <div class="mb-3">
+            <div class="card border-0" style="max-width: 16rem;">
+                <div class="row g-0">
+                    <div class="card-body">
+                        <div class="card-img mb-1">
+                            <img src="@item.ImageUrl" class="Image-Size"/>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="text-md-start mb-1">
+                                <h5>@item.Name</h5>
+                            </div>
+                            <p class="ms-auto stylized-p-border" >Movie</p>
+                        </div>
+
+                        <div class="d-flex text-sm-start font-size-sm">
+                            <p>$@item.Price -- </p> <p>@item.StartDate</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    }
+</div>
