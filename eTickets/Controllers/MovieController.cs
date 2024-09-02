@@ -15,7 +15,7 @@ namespace eTickets.Controllers
 
         public async Task<IActionResult> Movies()
         {
-            var movieList = await _dbContext.Movies.ToListAsync();
+            var movieList = await _dbContext.Movies.Include(n => n.Cinema).ToListAsync();
 
             return View(movieList);
         }

@@ -1,0 +1,45 @@
+﻿#features .features-heading {
+  color: crimson;
+}
+#features .features-heading::after {
+  content: "";
+  position: absolute;
+  bottom: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 0.3rem;
+  width: 60%;
+  border-radius: 5rem;
+  background: #333;
+}
+#features .box-container {
+  width: 100%;
+  flex-wrap: wrap;
+}
+#features .box-container .box {
+  width: 14rem;
+  height: 17rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.3rem #333;
+  margin: 2rem;
+  flex-flow: column;
+  cursor: pointer;
+  overflow: hidden;
+}
+#features .box-container .box h5, #features .box-container .box p {
+  opacity: 0;
+  color: white;
+  text-align: center;
+  transition: transform ease 1s;
+}
+#features .box-container .box:hover h5 {
+  opacity: 1;
+  transform: translateY(-12rem);
+}
+#features .box-container .box:hover p {
+  opacity: 1;
+  transform: translateY(-11rem);
+}
+#features .box-container .box:hover {
+  background-color: #333;
+}
