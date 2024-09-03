@@ -1,45 +1,38 @@
-﻿@mixin features-heading() {
-    
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -1.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        height: .3rem;
-        width: 60%;
-        border-radius: 5rem;
-        background: #333;
-    }
-}
-
-
+﻿
 #features {
 
-    .features-heading {
-        @include features-heading();
-        color: crimson;
-    }
-
     .box-container {
-        width: 100%;
-        flex-wrap: wrap;
 
         .box {
-            width: 14rem;
-            height: 17rem;
+            overflow: hidden;
             border-radius: .5rem;
             box-shadow: 0 0 .3rem #333;
-            margin: 2rem;
-            flex-flow: column;
             cursor: pointer;
-            overflow: hidden;
+            background-color: black;
 
-            h5,p {
+            h5, p {
+                position: absolute;
                 opacity: 0;
                 color: white;
                 text-align: center;
+                transition: transform ease 1s;
+                left: 2rem;
+            }
+
+            .btn-primary {
+                position: absolute;
+                bottom: 7rem;
+                left: 2rem;
+                padding: 5px 7px;
+                color: white;
+                background-color: green;
+                border-radius: 5px;
+                text-decoration: none;
+                opacity: 0;
+                transition: opacity ease 2s;
+            }
+
+            img {
                 transition: transform ease 1s;
             }
 
@@ -51,6 +44,14 @@
             &:hover p {
                 opacity: 1;
                 transform: translateY(-11rem);
+            }
+
+            &:hover img {
+                transform: translateY(-3rem);
+            }
+
+            &:hover a {
+                opacity: 1;
             }
 
             &:hover {

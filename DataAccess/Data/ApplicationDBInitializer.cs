@@ -83,7 +83,19 @@ namespace eTickets.DataAccess.Data
                                     Category = MovieCategory.Action,
                                     CinemaId = 1,
                                     ProducerId = 1,
-                        }
+                        },
+                        new Movie()
+                        {
+                                    Name = "Dead Rice",
+                                    Description = "what a mommny loves death",
+                                    Price = 42.00,
+                                    ImageUrl = "https://i.ebayimg.com/images/g/smIAAOSw8UNkfzbS/s-l1600.webp",
+                                    StartDate = DateTime.Now,
+                                    EndDate = DateTime.Now.AddDays(7),
+                                    Category = MovieCategory.Documentary,
+                                    CinemaId = 1,
+                                    ProducerId = 1,
+                        },
                     });
                     context.SaveChanges();
                 }
