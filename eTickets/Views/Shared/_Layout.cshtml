@@ -26,19 +26,21 @@
                             <a class="nav-link text-dark" asp-controller="Movie" asp-action="Movies"> <i class="badge-info bi-film">Movies</i></a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="button" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="bi bi-gear"></i>Management 
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-action="Cinema" asp-controller="Cinemas"> <i class="bg-info bi-camera-reels">Cinema</i> </a>
-                                <a class="dropdown-item" asp-action="Producer" asp-controller="Producers"> <i class="bg-info bi-camera-reels">Producer</i> </a>
-                                <a class="dropdown-item" asp-action="Actor" asp-controller="Actors"> <i class="bg-info bi-camera-reels">Actor</i> </a>
+                                <a class="dropdown-item" asp-action="Cinemas" asp-controller="Cinema"> <i class="bi bi-camera-reels">Cinema</i> </a>
+                                <a class="dropdown-item" asp-action="Producers" asp-controller="Producer"> <i class="bi bi-person-badge">Producer</i> </a>
+                                <a class="dropdown-item" asp-action="Actors" asp-controller="Actor"> <i class="bi bi-person-arms-up">Actor</i> </a>
                             </div> 
                         </li>
                     </ul>
 
                      <form class="form-inline my-2 my-lg-0" asp-controller="Movie" asp-action="Filter" style="padding-right:25px;" method="post">
+
+                        @* https://stackoverflow.com/questions/21017542/bootstrap-form-inline-not-working *@
 
                         <div class="input-group"> @* div class input group was necessary for form inline, some kind of issue with bootsrap *@
                         <input name="searchString" type="text" class="form-control" placeholder="Search for a Movie..." />

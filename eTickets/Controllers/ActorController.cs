@@ -7,9 +7,9 @@ namespace eTickets.Controllers
 {
     public class ActorController : Controller
     {
-        private readonly ActorService _actorServ;
+        private readonly IActorService _actorServ; //use actual interface for unit testing, flexibility
 
-        public ActorController(ActorService actorServ)
+        public ActorController(IActorService actorServ)
         {
             _actorServ = actorServ;
         }
@@ -19,6 +19,11 @@ namespace eTickets.Controllers
             var actors = await _actorServ.GetAll();
  
             return View(actors);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }
