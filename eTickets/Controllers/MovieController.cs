@@ -19,5 +19,10 @@ namespace eTickets.Controllers
 
             return View(movieList);
         }
+
+        public string Filter(string searchString)
+        {
+            return null;
+        }
     }
 }

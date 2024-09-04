@@ -20,13 +20,27 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Movie" asp-action="Movies"> <i class="badge-info bi-film">Movies</i></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-gear"></i>Management 
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-action="Cinema" asp-controller="Cinemas"> <i class="bg-info bi-camera-reels">Cinema</i> </a>
+                                <a class="dropdown-item" asp-action="Producer" asp-controller="Producers"> <i class="bg-info bi-camera-reels">Producer</i> </a>
+                                <a class="dropdown-item" asp-action="Actor" asp-controller="Actors"> <i class="bg-info bi-camera-reels">Actor</i> </a>
+                            </div> 
                         </li>
                     </ul>
+
+                    <form class="form-inline my-2 my-lg-0" asp-controller="Movie" asp-action="Filter" style="margin-right: 2rem;">
+                        <input name="searchString" type="text" class="form-control" placeholder="Search for a Movie..." />
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i class="bi bi-search"></i> </button>
+                    </form>
                 </div>
             </div>
         </nav>
