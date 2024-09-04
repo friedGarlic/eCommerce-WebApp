@@ -20,8 +20,10 @@ namespace eTickets.DataAccess.Services
 
         public void Add(Actor actor)
         {
+            _context.Add(actor);
+            _context.SaveChanges();
         }
-
+         
         public void Delete(int id)
         {
         }
