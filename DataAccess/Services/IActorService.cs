@@ -11,11 +11,11 @@ namespace eTickets.DataAccess.Services
     {
         Task<IEnumerable<Actor>> GetAll();
 
-        Actor GetById(int id);
+        public Task<Actor> GetById(int id);
 
-        Actor Update(int id, Actor actor);
+        Task<Actor> Update(int id, Actor actor);
 
-        void Add(Actor actor);
+        public Task Add(Actor actor);
 
         void Delete(int id);
     }

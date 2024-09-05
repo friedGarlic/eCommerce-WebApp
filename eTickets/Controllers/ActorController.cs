@@ -29,14 +29,51 @@ namespace eTickets.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateActor([Bind("FullName, ProfilePictureUrl, Bio")]Actor actor)
+        public async Task<IActionResult> Create([Bind("FullName, ProfilePictureUrl, Bio")]Actor actor)
         {
             //if (!ModelState.IsValid)
             //{
             //    return View(actor);
             //}
 
-            _actorServ.Add(actor);
+            await _actorServ.Add(actor);
+
+            return RedirectToAction(nameof(Actors));
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var actorDetails = await _actorServ.GetById(id);
+
+            if (actorDetails == null)
+            {
+                return View("Empty");
+            }
+
+            return View(actorDetails);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var getActor = _actorServ.GetById(id);
+
+            if (getActor == null)
+            {
+                return View("NotFound");
+            }
+
+            return View(getActor);
+        } 
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName, ProfilePictureUrl, Bio")] Actor actor)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(actor);
+            //}
+
+            await _actorServ.Update(id, actor);
 
             return RedirectToAction(nameof(Actors));
         }

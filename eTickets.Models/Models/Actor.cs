@@ -7,7 +7,7 @@ namespace eTickets.Models
     {
         public int Id {  get; set; }
 
-        [Display(Name = "Profilc Picture Url")]
+        [Display(Name = "Profile Picture Url")]
         [Required(ErrorMessage = "Picture is required")]
         public string ProfilePictureUrl { get; set; }
 
