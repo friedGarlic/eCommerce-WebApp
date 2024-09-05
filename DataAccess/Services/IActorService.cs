@@ -9,14 +9,14 @@ namespace eTickets.DataAccess.Services
 {
     public interface IActorService
     {
-        Task<IEnumerable<Actor>> GetAll();
+        public Task<IEnumerable<Actor>> GetAll();
 
         public Task<Actor> GetById(int id);
 
-        Task<Actor> Update(int id, Actor actor);
+        public Task<Actor> Update(int id, Actor actor);
 
         public Task Add(Actor actor);
 
-        void Delete(int id);
+        public Task Delete(int id);
     }
 }
