@@ -2,6 +2,7 @@
 using eTickets.DataAccess.Repositories.Interfaces;
 using eTickets.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,19 +20,18 @@ namespace eTickets.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task Add(T actor)
+        public async Task Add(T entity)
         {
-            await _context.AddAsync(actor);
+            await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var findId = await _context.Actors.FirstOrDefaultAsync(x => x.Id == id);
-
-            _context.Actors.Remove(findId);
-
-            await _context.SaveChangesAsync();
+            var findEntityId = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            //_context.Set<T>().Remove(findId);
+            EntityEntry entityEntry = _context.Entry<T>(findEntityId);
+            entityEntry.State = EntityState.Deleted;
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -48,12 +48,13 @@ namespace eTickets.DataAccess.Repositories
             return result;
         }
 
-        public async Task<T> Update(int id, T entity)
+        public async Task Update(int id, T entity)
         {
-            _context.Update(entity);
-            await _context.SaveChangesAsync();
+            //_context.Set<T>().Update(entity);
+            //await _context.SaveChangesAsync();
 
-            return entity;
+            EntityEntry entityEntry = _context.Entry<T>(entity);
+            entityEntry.State = EntityState.Modified;
         }
     }
 }

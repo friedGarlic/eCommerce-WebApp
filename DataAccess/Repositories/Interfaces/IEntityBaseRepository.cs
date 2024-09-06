@@ -13,10 +13,10 @@ namespace eTickets.DataAccess.Repositories.Interfaces
 
         public Task<T> GetById(int id);
 
-        public Task<T> Update(int id, T entity);
+        public Task Update(int id, T entity);
 
         public Task Add(T entity);
 
-        public Task Delete(int id);
+        public Task DeleteAsync(int id);
     }
 }
