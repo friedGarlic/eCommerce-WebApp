@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace eTickets.DataAccess.Repositories
 {
-    public class EntityBase : IEntityBase
+    public class EntityBase
     {
-        public int Id { get; set; }
     }
 }

@@ -1,5 +1,7 @@
-﻿using eTickets.DataAccess.Repositories.Interfaces;
+﻿using eTickets.DataAccess.Data;
+using eTickets.DataAccess.Repositories.Interfaces;
 using eTickets.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +12,48 @@ namespace eTickets.DataAccess.Repositories
 {
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
-        public Task Add(T entity)
+        private readonly ApplicationDbContext _context;
+
+        public EntityBaseRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task Delete(int id)
+        public async Task Add(T actor)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(actor);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<T>> GetAll()
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var findId = await _context.Actors.FirstOrDefaultAsync(x => x.Id == id);
+
+            _context.Actors.Remove(findId);
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Actor> GetById(int id)
+        public async Task<IEnumerable<T>> GetAll()
         {
-            throw new NotImplementedException();
+            var getActorList = await _context.Set<T>().ToListAsync();
+
+            return getActorList;
         }
 
-        public Task<Actor> Update(int id, T entity)
+        public async Task<T> GetById(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
+        }
+
+        public async Task<T> Update(int id, T entity)
+        {
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
+
+            return entity;
         }
     }
 }

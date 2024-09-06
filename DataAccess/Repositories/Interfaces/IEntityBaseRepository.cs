@@ -11,9 +11,9 @@ namespace eTickets.DataAccess.Repositories.Interfaces
     {
         public Task<IEnumerable<T>> GetAll();
 
-        public Task<Actor> GetById(int id);
+        public Task<T> GetById(int id);
 
-        public Task<Actor> Update(int id, T entity);
+        public Task<T> Update(int id, T entity);
 
         public Task Add(T entity);
 

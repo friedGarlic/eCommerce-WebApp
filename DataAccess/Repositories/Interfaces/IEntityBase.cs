@@ -8,5 +8,6 @@ namespace eTickets.DataAccess.Repositories.Interfaces
 {
     public interface IEntityBase
     {
+        int Id { get; }
     }
 }
