@@ -73,7 +73,7 @@ namespace eTickets.Controllers
             //    return View(actor);
             //}
 
-            await _actorServ.Update(id, actor);
+            await _actorServ.Update(actor);
 
             return RedirectToAction(nameof(Actors));
         }

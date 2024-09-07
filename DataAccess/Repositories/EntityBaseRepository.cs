@@ -35,6 +35,7 @@ namespace eTickets.DataAccess.Repositories
             //_context.Set<T>().Remove(findId);
             EntityEntry entityEntry = _context.Entry<T>(findEntityId);
             entityEntry.State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -51,7 +52,7 @@ namespace eTickets.DataAccess.Repositories
             return result;
         }
 
-        public async Task Update(int id, T entity)
+        public async Task Update(T entity)
         {
             //_context.Set<T>().Update(entity);
 

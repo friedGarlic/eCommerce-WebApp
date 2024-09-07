@@ -14,7 +14,7 @@ namespace eTickets.DataAccess.Repositories.Interfaces
 
         public Task<T> GetById(int id);
 
-        public Task Update(int id, T entity);
+        public Task Update(T entity);
 
         public Task<T> Add(T entity);
 

@@ -35,6 +35,43 @@ namespace eTickets.Controllers
         {
             var model = await _producer.Add(producer);
 
+            return RedirectToAction(nameof(Producers));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var foundId = await _producer.GetById(id);
+
+            return View(foundId);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit([Bind("Id,ProfilePictureUrl,FullName,Bio")]Producer producer)
+        {
+            await _producer.Update(producer);
+
+            return RedirectToAction(nameof(Producers));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model = await _producer.GetById(id);
+
+            return View(model);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+            await _producer.DeleteAsync(id);
+
+            return RedirectToAction(nameof(Producers));
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await _producer.GetById(id);
+
             return View(model);
         }
     }

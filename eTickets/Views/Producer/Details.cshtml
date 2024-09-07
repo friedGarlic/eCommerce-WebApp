@@ -1,0 +1,57 @@
+﻿@model Producer
+
+<style>
+
+    .Image-Size{
+        width: 15rem;
+        height: 17rem;
+    }
+
+</style>
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1 style="text-align: center;"> Confirm Delete Producer</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div asp-validation-summary="ModelOnly" class="text-danger">
+                </div>
+                <div class="form-group text-center">
+                    <img class="Image-Size" id="ProfilePicturePreview" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProfilePictureUrl" class="control-label"></label>
+                    <input asp-for="@Model.ProfilePictureUrl" class="form-control" readonly />
+                    <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label"></label>
+                    <input asp-for="@Model.FullName" class="form-control" readonly />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Bio" class="control-label"></label>
+                    <input asp-for="@Model.Bio" class="form-control" readonly />
+                    <span asp-validation-for="Bio" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <a class="btn btn-outline-secondary" asp-action="Producers">Show Producers</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var getPictSrc = document.getElementById('ProfilePicturePreview');
+            getPictSrc.src = $("#ProfilePictureUrl").val();
+        })
+
+    </script>
+}
