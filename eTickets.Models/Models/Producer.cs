@@ -6,7 +6,8 @@ namespace eTickets.Models
 {
     public class Producer : IEntityBase
     {
-        public int Id { get;}
+        [Key]
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Profile Picture Url is Required")]
         [DisplayName("Profile Picture Url")]

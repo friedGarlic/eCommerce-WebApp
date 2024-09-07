@@ -1,10 +1,12 @@
 ﻿using eTickets.Models.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace eTickets.Models
 {
     public class Cinema : IEntityBase
     {
-        public int Id { get;}
+        [Key]
+        public int Id { get; set; }
 
         public string Logo { get; set; }
         public string Name { get; set; }

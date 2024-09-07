@@ -8,6 +8,6 @@ namespace eTickets.Models.Models.Base
 {
     public interface IEntityBase
     {
-        int Id { get; }
+        public int Id { get; set; }
     }
 }
