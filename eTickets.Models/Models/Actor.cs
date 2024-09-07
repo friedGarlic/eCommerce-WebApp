@@ -1,12 +1,11 @@
 ﻿using eTickets.Models.Models;
+using eTickets.Models.Models.Base;
 using System.ComponentModel.DataAnnotations;
 
 namespace eTickets.Models
 {
-    public class Actor
+    public class Actor : IEntityBase
     {
-        public int Id {  get; set; }
-
         [Display(Name = "Profile Picture Url")]
         [Required(ErrorMessage = "Picture is required")]
         public string ProfilePictureUrl { get; set; }
@@ -20,5 +19,7 @@ namespace eTickets.Models
         public string Bio {  get; set; }
 
         public List<Actor_Movie> Actor_Movies { get; set; }
+
+        public int Id { get; }
     }
 }

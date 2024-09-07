@@ -1,6 +1,7 @@
 ﻿using eTickets.DataAccess.Data;
 using eTickets.DataAccess.Repositories.Interfaces;
 using eTickets.Models;
+using eTickets.Models.Models.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -20,10 +21,12 @@ namespace eTickets.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task Add(T entity)
+        public async Task<T> Add(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
+
+            return entity;
         }
 
         public async Task DeleteAsync(int id)
@@ -51,10 +54,10 @@ namespace eTickets.DataAccess.Repositories
         public async Task Update(int id, T entity)
         {
             //_context.Set<T>().Update(entity);
-            //await _context.SaveChangesAsync();
 
             EntityEntry entityEntry = _context.Entry<T>(entity);
             entityEntry.State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }

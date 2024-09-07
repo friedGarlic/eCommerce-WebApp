@@ -1,4 +1,5 @@
 ﻿using eTickets.Models;
+using eTickets.Models.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace eTickets.DataAccess.Repositories.Interfaces
 
         public Task Update(int id, T entity);
 
-        public Task Add(T entity);
+        public Task<T> Add(T entity);
 
         public Task DeleteAsync(int id);
     }

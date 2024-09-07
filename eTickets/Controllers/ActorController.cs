@@ -1,5 +1,5 @@
 ﻿using eTickets.DataAccess.Data;
-using eTickets.DataAccess.Services;
+using eTickets.DataAccess.Services.Interfaces;
 using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -93,7 +93,7 @@ namespace eTickets.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _actorServ.Delete(id);
+            await _actorServ.DeleteAsync(id);
 
             return RedirectToAction(nameof(Actors));
         }
