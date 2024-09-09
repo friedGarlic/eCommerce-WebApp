@@ -23,6 +23,7 @@ namespace eTickets.DataAccess.Repositories
             _context = context;
         }
         
+        //Stacking include even when theres a lot of lambda expression, array[]
         public IEnumerable<T> GetAllAsync(params Expression<Func<T, object>>[] properties)
         {
             IQueryable<T> query = _context.Set<T>();
