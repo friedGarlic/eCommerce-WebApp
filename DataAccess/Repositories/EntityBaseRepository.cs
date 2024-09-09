@@ -5,8 +5,10 @@ using eTickets.Models.Models.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +21,17 @@ namespace eTickets.DataAccess.Repositories
         public EntityBaseRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+        
+        public IEnumerable<T> GetAllAsync(params Expression<Func<T, object>>[] properties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+
+            //store to dataTable modified uqery to include prperty into one query table, even if theres a lot of lambda expression properties passed on.
+            query = properties.Aggregate( query, (currentQueryState, includeProperty) => currentQueryState.Include(includeProperty)); //aggregate to ensure applied one by one to query
+
+            //TODO try to use Where as query( current.Where(maybe filter) ) next time
+            return query;
         }
 
         public async Task<T> Add(T entity)
