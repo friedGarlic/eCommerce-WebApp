@@ -1,0 +1,65 @@
+﻿@model Cinema
+
+<style>
+
+    .Image-Size {
+        width: 15rem;
+        height: 17rem;
+    }
+
+</style>
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1> Delete confirm cinema</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Delete" asp-controller="Cinema" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger">
+                    </div>
+                    <div class="form-group text-center">
+                        <img class="Image-Size" id="ProfilePicturePreview" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Logo" class="control-label"></label>
+                        <input asp-for="@Model.Logo" class="form-control" readonly/>
+                        <span asp-validation-for="Logo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="@Model.Name" class="form-control" readonly />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="@Model.Description" class="form-control" readonly />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" asp-route-id="@Model.Id" />
+                        <input type="submit" value="Confirm" class="btn btn-outline-success float-end" />
+                        <a class="btn btn-outline-secondary" asp-action="Cinemas">Show Cinemas</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $("#Logo").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        })
+
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#Logo").val();
+        })
+    </script>
+}
