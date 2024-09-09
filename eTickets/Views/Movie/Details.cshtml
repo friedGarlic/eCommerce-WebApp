@@ -1,0 +1,48 @@
+﻿@model Movie
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <div class="card mb-3" style="max-width: 50rem;">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Name
+                                <a class="text-white float-end"> <i class="bi bi-pencil-square"></i></a>
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="@Model.ImageUrl" style="width:100%;" />
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <p class="card-text"> <b>Cinema: </b> 
+                            <a asp-action="Details" asp-controller="Cinema" asp-route-id="@Model.Cinema.Id">@Model.Cinema.Name</a></p>
+                        <p class="card-text"> @Model.Description </p>
+                        <p class="card-text">
+                            <b>Producer: </b>
+                            <a asp-action="Details" asp-controller="Producer" asp-route-id="@Model.Producer.Id">@Model.Producer.FullName</a>
+                        </p>
+                        <hr />
+                        <p class="card-text"> @Model.Description </p>
+
+                        <p class="card-text">
+                            <b> Actors: </b>
+                            <hr />
+                            <div class="row">
+                                @foreach(var i in Model.Actor_Movies)
+                                {
+                                    <img src="@i.Actor.ProfilePictureUrl" class="rounded-circle text-md-center" style="width: 10rem;"/>
+                                    <p>@i.Actor.FullName</p>
+                                }
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

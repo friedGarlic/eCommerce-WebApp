@@ -22,9 +22,11 @@ namespace eTickets.Controllers
             return View(movieList);
         }
 
-        public string Filter(string searchString)
+        public async Task<IActionResult> Details(int id)
         {
-            return null;
+            var model = await _service.GetMovieById(id);
+
+            return View(model);
         }
     }
 }

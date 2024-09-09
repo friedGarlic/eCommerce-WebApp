@@ -22,7 +22,20 @@
             .btn-primary {
                 position: absolute;
                 bottom: 7rem;
-                left: 2rem;
+                left: 1.5rem;
+                padding: 5px 7px;
+                color: white;
+                background-color: green;
+                border-radius: 5px;
+                text-decoration: none;
+                opacity: 0;
+                transition: opacity ease 2s;
+            }
+
+            .btn-secondary {
+                position: absolute;
+                bottom: 7rem;
+                left: 9.5rem;
                 padding: 5px 7px;
                 color: white;
                 background-color: green;

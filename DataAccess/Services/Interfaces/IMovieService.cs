@@ -10,6 +10,6 @@ namespace eTickets.DataAccess.Services.Interfaces
 {
     public interface IMovieService : IEntityBaseRepository<Movie>
     {
-
+        public Task<Movie> GetMovieById(int id);
     }
 }
