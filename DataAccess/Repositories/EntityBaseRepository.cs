@@ -24,13 +24,14 @@ namespace eTickets.DataAccess.Repositories
         }
         
         //Stacking include even when theres a lot of lambda expression, array[]
-        public IEnumerable<T> GetAllAsync(params Expression<Func<T, object>>[] properties)
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] properties)
         {
             IQueryable<T> query = _context.Set<T>();
 
             //store to dataTable modified uqery to include prperty into one query table, even if theres a lot of lambda expression properties passed on.
             query = properties.Aggregate( query, (currentQueryState, includeProperty) => currentQueryState.Include(includeProperty)); //aggregate to ensure applied one by one to query
 
+            await query.ToListAsync();
             //TODO try to use Where as query( current.Where(maybe filter) ) next time
             return query;
         }
