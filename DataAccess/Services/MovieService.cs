@@ -3,6 +3,7 @@ using eTickets.DataAccess.Repositories;
 using eTickets.DataAccess.Repositories.Interfaces;
 using eTickets.DataAccess.Services.Interfaces;
 using eTickets.Models;
+using eTickets.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,19 @@ namespace eTickets.DataAccess.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return query;
+        }
+
+        public async Task<DropdownsVM> GetDropDownValues()
+        {
+            var response = new DropdownsVM()
+            {
+                Actors = await _context.Actors.OrderBy(n => n.FullName).ToListAsync(),
+                Cinemas = await _context.Cinemas.OrderBy(n => n.Name).ToListAsync(),
+                Producers = await _context.Producers.OrderBy(n => n.FullName).ToListAsync()
+            };
+
+
+            return response;
         }
     }
 }
