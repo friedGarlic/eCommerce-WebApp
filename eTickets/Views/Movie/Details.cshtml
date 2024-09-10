@@ -1,5 +1,33 @@
 ﻿@model Movie
 
+<style>
+    .btn-primary {
+        padding: 5px 7px;
+        color: white;
+        background-color: green;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 1rem;
+        /* float: right; */
+        /* transform: translateY(9rem);
+        margin-right: 1rem; */
+        width: 20%;
+    }
+
+    .btn-secondary {
+        padding: 5px 7px;
+        color: white;
+        background-color: gray;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 1rem;
+        width: 20%;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+
 <div class="row">
     <div class="col-8 offset-2">
         <div class="card mb-3" style="max-width: 50rem;">
@@ -17,17 +45,16 @@
                 <div class="col-md-6">
                     <img src="@Model.ImageUrl" style="width:100%;" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 d-flex flex-column">
                     <div class="card-body">
                         <p class="card-text"> <b>Cinema: </b> 
                             <a asp-action="Details" asp-controller="Cinema" asp-route-id="@Model.Cinema.Id">@Model.Cinema.Name</a></p>
-                        <p class="card-text"> @Model.Description </p>
                         <p class="card-text">
                             <b>Producer: </b>
                             <a asp-action="Details" asp-controller="Producer" asp-route-id="@Model.Producer.Id">@Model.Producer.FullName</a>
                         </p>
                         <hr />
-                        <p class="card-text"> @Model.Description </p>
+                        <p class="card-text"> <b>Desription: </b>@Model.Description </p>
 
                         <p class="card-text">
                             <b> Actors: </b>
@@ -35,13 +62,21 @@
                             <div class="row">
                                 @foreach(var i in Model.Actor_Movies)
                                 {
-                                    <img src="@i.Actor.ProfilePictureUrl" class="rounded-circle text-md-center" style="width: 10rem;"/>
-                                    <p>@i.Actor.FullName</p>
+                                    <div class="column text-center">
+                                        <img src="@i.Actor.ProfilePictureUrl" class="rounded-circle border-info" style="max-width: 10rem;"/>
+                                        <br />
+                                        <a asp-controller="Actor" asp-action="Details" asp-route-id="@i.Actor.Id">@i.Actor.FullName</a>
+                                    </div>
                                 }
                             </div>
                         </p>
                     </div>
+                    <div class="row">
+                    <a class="btn-secondary mt-auto"> <i class="bi bi-arrow-left"> ToList</i></a>
+                    <a class="btn-primary mt-auto ms-auto"> <i class="bi bi-cart-plus">ToCart</i></a>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>

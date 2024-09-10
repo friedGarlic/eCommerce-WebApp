@@ -28,5 +28,11 @@ namespace eTickets.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> AddMovie()
+        {
+
+            return View();
+        }
     }
 }
