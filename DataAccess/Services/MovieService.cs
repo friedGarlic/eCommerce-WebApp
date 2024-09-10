@@ -41,7 +41,6 @@ namespace eTickets.DataAccess.Services
                 Producers = await _context.Producers.OrderBy(n => n.FullName).ToListAsync()
             };
 
-
             return response;
         }
     }

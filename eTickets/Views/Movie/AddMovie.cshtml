@@ -1,4 +1,5 @@
 ﻿@using eTickets.Models.ViewModels
+@using eTickets.Models.Models.Enumerables
 @model MovieVM
 
 
@@ -45,22 +46,22 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label asp-for="CinemaId" class="form-label"></label>
-                                <select asp-for="CinemaId" class="form-select" />
+                                <select asp-for="CinemaId" class="form-select" asp-items="ViewBag.Cinemas"> </select>
                                 <span asp-validation-for="CinemaId" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label asp-for="Category" class="form-label"></label>
-                                <select asp-for="Category" class="form-select" multiple />
+                                <select asp-for="Category" class="form-select" asp-items="Html.GetEnumSelectList<MovieCategory>()"> </select>
                                 <span asp-validation-for="Category" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label asp-for="ProducerId" class="form-label"></label>
-                                <select asp-for="ProducerId" class="form-select" multiple />
+                                <select asp-for="ProducerId" class="form-select" asp-items="ViewBag.Producers"> </select>
                                 <span asp-validation-for="ProducerId" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
                                 <label asp-for="ActorId" class="form-label"></label>
-                                <select asp-for="ActorId" class="form-control" multiple/>
+                                <select asp-for="ActorId" class="form-select" asp-items="ViewBag.Actors"> </select>
                                 <span asp-validation-for="ActorId" class="text-danger"></span>
                             </div>
                         </div>
@@ -74,7 +75,7 @@
                         </div>
 
                         <div class="col-md-4 offset-4 text-center">
-                            <img style="width:100%" id="ImageUrlPreview" />
+                            <img width="100%" id="ImageUrlPreview" />
                         </div>
                     </div>
                 </form>
@@ -85,8 +86,8 @@
 
 @section Scripts{
     <script>
-        $("# ImageUrl").on("change",function(){
-            var addToSrc = document.getElementById("ImageUrlPreview");
+        $("#ImageUrl").on("change",function( ){
+            var addToSrc = document.getElementById('ImageUrlPreview');
             addToSrc.src = $(this).val();
         })
     </script>

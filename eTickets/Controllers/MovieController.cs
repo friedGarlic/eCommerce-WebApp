@@ -2,6 +2,7 @@
 using eTickets.DataAccess.Services.Interfaces;
 using eTickets.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
@@ -31,6 +32,11 @@ namespace eTickets.Controllers
 
         public async Task<IActionResult> AddMovie()
         {
+            var getDropdown = await _service.GetDropDownValues();
+
+            ViewBag.Cinemas = new SelectList(getDropdown.Cinemas, "Id", "Name");
+            ViewBag.Actors = new SelectList(getDropdown.Actors, "Id", "FullName");
+            ViewBag.Producers = new SelectList(getDropdown.Producers, "Id", "FullName");
 
             return View();
         }
