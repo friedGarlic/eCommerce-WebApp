@@ -3,6 +3,29 @@
 @model MovieVM
 
 
+<style>
+    .Image-Size {
+        width: 15rem;
+        height: 17rem;
+    }
+
+    .custom-fix-button-right {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin: 1rem;
+        width: 20%;
+    }
+
+    .custom-fix-button-left {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        margin: 1rem;
+        width: 20%;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-8 offset-2">
         <p>
@@ -10,12 +33,12 @@
         </p>
 
         <div class="row">
-            <div class="col-md-8 offset-2">
+            <div class="col-md-12" style="width: auto">
                 <form asp-action="AddMovie">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="mb-3">
                                 <label asp-for="Name" class="form-label"></label>
                                 <input asp-for="Name" class="form-control" />
@@ -43,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="mb-3">
                                 <label asp-for="CinemaId" class="form-label"></label>
                                 <select asp-for="CinemaId" class="form-select" asp-items="ViewBag.Cinemas"> </select>
@@ -66,16 +89,25 @@
                             </div>
                         </div>
 
+                        <div class="col-md-2 text-center">
+                            <img class="Image-Size" id="ImageUrlPreview" />
+                        </div>
+
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label asp-for="Description" class="form-label"></label>
-                                <textarea asp-for="Description" class="form-text" />
+                                <textarea asp-for="Description" class="form-text" style="width: 100%;"></textarea>
                                 <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <div class="col-md-4 offset-4 text-center">
-                            <img width="100%" id="ImageUrlPreview" />
+                        
+                        
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div class="row">
+                            <a class="btn btn-secondary custom-fix-button-left" asp-action="Movies">Show Movies</a>
+                            <input class="btn btn-success custom-fix-button-right" type="submit" value="Create" />
                         </div>
                     </div>
                 </form>
@@ -86,9 +118,9 @@
 
 @section Scripts{
     <script>
-        $("#ImageUrl").on("change",function( ){
-            var addToSrc = document.getElementById('ImageUrlPreview');
-            addToSrc.src = $(this).val();
+        $("#ImageUrl").on("change", function () {
+            var output = document.getElementById('ImageUrlPreview');
+            output.src = $(this).val();
         })
     </script>
 }

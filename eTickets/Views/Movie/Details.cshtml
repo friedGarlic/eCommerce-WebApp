@@ -10,7 +10,7 @@
         margin: 1rem;
         /* float: right; */
         /* transform: translateY(9rem);
-        margin-right: 1rem; */
+            margin-right: 1rem; */
         width: 20%;
     }
 
@@ -23,7 +23,8 @@
         margin: 1rem;
         width: 20%;
     }
-    a{
+
+    a {
         text-decoration: none;
     }
 </style>
@@ -47,8 +48,10 @@
                 </div>
                 <div class="col-md-6 d-flex flex-column">
                     <div class="card-body">
-                        <p class="card-text"> <b>Cinema: </b> 
-                            <a asp-action="Details" asp-controller="Cinema" asp-route-id="@Model.Cinema.Id">@Model.Cinema.Name</a></p>
+                        <p class="card-text">
+                            <b>Cinema: </b>
+                            <a asp-action="Details" asp-controller="Cinema" asp-route-id="@Model.Cinema.Id">@Model.Cinema.Name</a>
+                        </p>
                         <p class="card-text">
                             <b>Producer: </b>
                             <a asp-action="Details" asp-controller="Producer" asp-route-id="@Model.Producer.Id">@Model.Producer.FullName</a>
@@ -60,10 +63,10 @@
                             <b> Actors: </b>
                             <hr />
                             <div class="row">
-                                @foreach(var i in Model.Actor_Movies)
+                                @foreach (var i in Model.Actor_Movies)
                                 {
                                     <div class="column text-center">
-                                        <img src="@i.Actor.ProfilePictureUrl" class="rounded-circle border-info" style="max-width: 10rem;"/>
+                                        <img src="@i.Actor.ProfilePictureUrl" class="rounded-circle border-info" style="max-width: 10rem;" />
                                         <br />
                                         <a asp-controller="Actor" asp-action="Details" asp-route-id="@i.Actor.Id">@i.Actor.FullName</a>
                                     </div>
@@ -72,8 +75,8 @@
                         </p>
                     </div>
                     <div class="row">
-                    <a class="btn-secondary mt-auto"> <i class="bi bi-arrow-left"> ToList</i></a>
-                    <a class="btn-primary mt-auto ms-auto"> <i class="bi bi-cart-plus">ToCart</i></a>
+                        <a class="btn-secondary mt-auto"> <i class="bi bi-arrow-left"> ToList</i></a>
+                        <a class="btn-primary mt-auto ms-auto"> <i class="bi bi-cart-plus">ToCart</i></a>
                     </div>
                 </div>
 

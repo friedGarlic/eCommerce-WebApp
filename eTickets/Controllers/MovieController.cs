@@ -30,7 +30,7 @@ namespace eTickets.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> AddMovie()
+        public async Task<IActionResult> Create()
         {
             var getDropdown = await _service.GetDropDownValues();
 
