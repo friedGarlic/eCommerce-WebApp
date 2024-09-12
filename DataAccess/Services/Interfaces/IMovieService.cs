@@ -13,5 +13,6 @@ namespace eTickets.DataAccess.Services.Interfaces
     {
         public Task<Movie> GetMovieById(int id);
         public Task<DropdownsVM> GetDropDownValues();
+        public Task CreateMovie(MovieVM newMovieModel);
     }
 }

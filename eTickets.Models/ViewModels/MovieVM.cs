@@ -27,7 +27,7 @@ namespace eTickets.Models.ViewModels
         [Required(ErrorMessage = "StartDate is required")]
         public DateTime StartDate { get; set; }
 
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "Please select a Category")]
         public MovieCategory Category { get; set; }
@@ -39,8 +39,7 @@ namespace eTickets.Models.ViewModels
         [Required(ErrorMessage = "Please select a ProducerId")]
         public int ProducerId { get; set; }
 
-        [Required(ErrorMessage = "Please select a ActorId")]
-        public int ActorId { get; set; }
+        public List<int> ActorIds { get; set; }
 
     }
 }

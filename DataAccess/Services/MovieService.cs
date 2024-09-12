@@ -3,6 +3,7 @@ using eTickets.DataAccess.Repositories;
 using eTickets.DataAccess.Repositories.Interfaces;
 using eTickets.DataAccess.Services.Interfaces;
 using eTickets.Models;
+using eTickets.Models.Models;
 using eTickets.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -42,6 +43,34 @@ namespace eTickets.DataAccess.Services
             };
 
             return response;
+        }
+
+        public async Task CreateMovie(MovieVM newMovieModel)
+        {
+            var model = new Movie {
+                Name = newMovieModel.Name,
+                Price = newMovieModel.Price,
+                ImageUrl = newMovieModel.ImageUrl,
+                StartDate = newMovieModel.StartDate,
+                Category = newMovieModel.Category,
+                EndDate = newMovieModel.EndDate,
+                Description = newMovieModel.Description,
+                CinemaId = newMovieModel.CinemaId,
+                ProducerId = newMovieModel.ProducerId,
+            };
+            await _context.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            foreach (var ids in newMovieModel.ActorIds)
+            {
+                var bridgeModel = new Actor_Movie
+                {
+                    ActorId = ids,
+                    MovieId = model.Id
+                };
+                await _context.AddAsync(bridgeModel);
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }
