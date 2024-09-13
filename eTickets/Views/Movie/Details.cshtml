@@ -27,6 +27,12 @@
     a {
         text-decoration: none;
     }
+
+    .stylized-p-border {
+        border: .1rem solid black;
+        border-radius: 5px;
+        padding: 1px;
+    }
 </style>
 
 <div class="row">
@@ -38,7 +44,8 @@
                         <p class="card-text">
                             <h5 class="card-title">
                                 @Model.Name
-                                <a class="text-white float-end"> <i class="bi bi-pencil-square"></i></a>
+                                @* ---Edit Button--- *@
+                                <a class="text-white float-end" asp-action="Edit" asp-route-id="@Model.Id"> <i class="bi bi-pencil-square"></i></a>
                             </h5>
                         </p>
                     </div>
@@ -57,7 +64,11 @@
                             <a asp-action="Details" asp-controller="Producer" asp-route-id="@Model.Producer.Id">@Model.Producer.FullName</a>
                         </p>
                         <hr />
-                        <p class="card-text"> <b>Desription: </b>@Model.Description </p>
+                        <div class="d-flex flex-row card-text">
+                            <b>Category: </b>
+                            <p class="stylized-p-border" style="margin-left: .5rem;">@Model.Category</p>
+                        </div>
+                        <p class="card-link"> <b>Desription: </b>@Model.Description </p>
 
                         <p class="card-text">
                             <b> Actors: </b>

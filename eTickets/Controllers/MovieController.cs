@@ -49,5 +49,41 @@ namespace eTickets.Controllers
 
             return RedirectToAction("Movies");
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var movieModel = await _service.GetMovieById(id);
+
+            var movieVm = new MovieVM()
+            {
+                Id = movieModel.Id,
+                Name = movieModel.Name,
+                Description = movieModel.Description,
+                Price = movieModel.Price,
+                StartDate = movieModel.StartDate,
+                EndDate = movieModel.EndDate,
+                ProducerId = movieModel.ProducerId,
+                CinemaId = movieModel.CinemaId,
+                Category = movieModel.Category,
+                ImageUrl = movieModel.ImageUrl,
+                ActorIds = movieModel.Actor_Movies.Select(n => n.ActorId).ToList(),
+            };
+            var getDropdown = await _service.GetDropDownValues();
+
+            ViewBag.Cinemas = new SelectList(getDropdown.Cinemas, "Id", "Name");
+            ViewBag.Actors = new SelectList(getDropdown.Actors, "Id", "FullName");
+            ViewBag.Producers = new SelectList(getDropdown.Producers, "Id", "FullName");
+
+            return View(movieVm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MovieVM modelVm)
+        {
+
+
+            return RedirectToAction("Movies");
+        }
+
     }
 }

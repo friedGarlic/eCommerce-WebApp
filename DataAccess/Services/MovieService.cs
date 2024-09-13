@@ -72,5 +72,44 @@ namespace eTickets.DataAccess.Services
             }
             await _context.SaveChangesAsync();
         }
+
+        public async Task EditMovie(MovieVM newMovieModel)
+        {
+            var model = new Movie
+            {
+                Name = newMovieModel.Name,
+                Price = newMovieModel.Price,
+                ImageUrl = newMovieModel.ImageUrl,
+                StartDate = newMovieModel.StartDate,
+                Category = newMovieModel.Category,
+                EndDate = newMovieModel.EndDate,
+                Description = newMovieModel.Description,
+                CinemaId = newMovieModel.CinemaId,
+                ProducerId = newMovieModel.ProducerId,
+            };
+
+            try
+            {
+                _context.Update(model);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex) { }
+
+            //remove rel model actor_movies in range
+            var listMovieActorModel = _context.Actor_Movies.Where(n => n.MovieId == newMovieModel.Id).ToList();
+            _context.RemoveRange(listMovieActorModel);
+            await _context.SaveChangesAsync();
+
+            foreach (var ids in newMovieModel.ActorIds)
+            {
+                var bridgeModel = new Actor_Movie
+                {
+                    ActorId = ids,
+                    MovieId = model.Id
+                };
+                await _context.AddAsync(bridgeModel);
+            }
+            await _context.SaveChangesAsync();
+        }
     }
 }
