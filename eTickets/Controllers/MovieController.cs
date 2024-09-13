@@ -80,7 +80,7 @@ namespace eTickets.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(MovieVM modelVm)
         {
-
+            await _service.EditMovie(modelVm);
 
             return RedirectToAction("Movies");
         }

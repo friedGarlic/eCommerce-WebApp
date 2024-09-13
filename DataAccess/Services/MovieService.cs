@@ -75,25 +75,21 @@ namespace eTickets.DataAccess.Services
 
         public async Task EditMovie(MovieVM newMovieModel)
         {
-            var model = new Movie
-            {
-                Name = newMovieModel.Name,
-                Price = newMovieModel.Price,
-                ImageUrl = newMovieModel.ImageUrl,
-                StartDate = newMovieModel.StartDate,
-                Category = newMovieModel.Category,
-                EndDate = newMovieModel.EndDate,
-                Description = newMovieModel.Description,
-                CinemaId = newMovieModel.CinemaId,
-                ProducerId = newMovieModel.ProducerId,
-            };
+            var dbMovieModel = await _context.Movies.FirstOrDefaultAsync(n => n.Id == newMovieModel.Id);
 
-            try
+            if (dbMovieModel != null)
             {
-                _context.Update(model);
-                await _context.SaveChangesAsync();
+                dbMovieModel.Name = newMovieModel.Name;
+                dbMovieModel.Price = newMovieModel.Price;
+                dbMovieModel.ImageUrl = newMovieModel.ImageUrl;
+                dbMovieModel.StartDate = newMovieModel.StartDate;
+                dbMovieModel.Category = newMovieModel.Category;
+                dbMovieModel.EndDate = newMovieModel.EndDate;
+                dbMovieModel.Description = newMovieModel.Description;
+                dbMovieModel.CinemaId = newMovieModel.CinemaId;
+                dbMovieModel.ProducerId = newMovieModel.ProducerId;
             }
-            catch (Exception ex) { }
+            await _context.SaveChangesAsync();
 
             //remove rel model actor_movies in range
             var listMovieActorModel = _context.Actor_Movies.Where(n => n.MovieId == newMovieModel.Id).ToList();
@@ -105,7 +101,7 @@ namespace eTickets.DataAccess.Services
                 var bridgeModel = new Actor_Movie
                 {
                     ActorId = ids,
-                    MovieId = model.Id
+                    MovieId = dbMovieModel.Id
                 };
                 await _context.AddAsync(bridgeModel);
             }
