@@ -38,12 +38,12 @@
                         </li>
                     </ul>
 
-                     <form class="form-inline my-2 my-lg-0" asp-controller="Movie" asp-action="Filter" style="padding-right:25px;" method="post">
+                    <form class="form-inline my-2 my-lg-0" asp-controller="Movie" asp-action="Filter" style="padding-right:25px;" method="post">
 
                         @* https://stackoverflow.com/questions/21017542/bootstrap-form-inline-not-working *@
 
                         <div class="input-group"> @* div class input group was necessary for form inline, some kind of issue with bootsrap *@
-                        <input name="searchString" type="text" class="form-control" placeholder="Search for a Movie..." />
+                        <input name="filterString" type="text" class="form-control" placeholder="Search for a Movie..." />
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i class="bi bi-search"></i> </button>
                         </div>
                     </form> 

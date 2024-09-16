@@ -85,5 +85,18 @@ namespace eTickets.Controllers
             return RedirectToAction("Movies");
         }
 
+        public async Task<IActionResult> Filter(string filterString)
+        {
+            var allMovies = await _service.GetAllAsync(n => n.Cinema );
+
+            if (filterString != null)
+            {
+                var filteredMovies = allMovies.Where(n => n.Name.ToLower().Contains(filterString.ToLower()) || n.Description.Contains(filterString));
+
+                return View(nameof(Movies), filteredMovies);
+            }
+
+            return View(nameof(Movies), allMovies);
+        }
     }
 }
