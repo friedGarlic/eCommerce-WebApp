@@ -25,6 +25,7 @@ namespace eTickets.DataAccess.Services
 
         public async Task<Movie> GetMovieById(int id)
         {
+            //EAGER LOADING
             var query = await _context.Movies.Include(c => c.Cinema)
                 .Include(p => p.Producer)
                 .Include(am => am.Actor_Movies).ThenInclude(a => a.Actor)
