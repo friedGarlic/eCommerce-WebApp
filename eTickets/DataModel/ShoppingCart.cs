@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
-    public class ShoppingCart : Controller
+    public class ShoppingCart
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -63,12 +63,12 @@ namespace eTickets.Controllers
 
         }
 
-        public List<ShoppingCartItem> GetShoppingCartItems()
+        public async Task<List<ShoppingCartItem>> GetShoppingCartItems()
         {
             if (Items != null)
             {
                 //EAGER loading
-                Items = _dbContext.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Include(n => n.Movie).ToList();
+                Items = await _dbContext.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Include(n => n.Movie).ToListAsync();
             }
 
             return Items;
