@@ -44,7 +44,7 @@ namespace eTickets.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actors");
+                    b.ToTable("Actors", (string)null);
                 });
 
             modelBuilder.Entity("eTickets.Models.Cinema", b =>
@@ -69,7 +69,7 @@ namespace eTickets.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas");
+                    b.ToTable("Cinemas", (string)null);
                 });
 
             modelBuilder.Entity("eTickets.Models.Models.Actor_Movie", b =>
@@ -84,7 +84,7 @@ namespace eTickets.DataAccess.Migrations
 
                     b.HasIndex("ActorId");
 
-                    b.ToTable("Actor_Movies");
+                    b.ToTable("Actor_Movies", (string)null);
                 });
 
             modelBuilder.Entity("eTickets.Models.Models.Order", b =>
@@ -105,7 +105,7 @@ namespace eTickets.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("eTickets.Models.Models.OrderItem", b =>
@@ -134,7 +134,7 @@ namespace eTickets.DataAccess.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("eTickets.Models.Models.ShoppingCartItem", b =>
@@ -159,7 +159,7 @@ namespace eTickets.DataAccess.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("ShoppingCartItems");
+                    b.ToTable("ShoppingCartItems", (string)null);
                 });
 
             modelBuilder.Entity("eTickets.Models.Movie", b =>
@@ -206,7 +206,7 @@ namespace eTickets.DataAccess.Migrations
 
                     b.HasIndex("ProducerId");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movies", (string)null);
                 });
 
             modelBuilder.Entity("eTickets.Models.Producer", b =>
@@ -231,7 +231,7 @@ namespace eTickets.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producers");
+                    b.ToTable("Producers", (string)null);
                 });
 
             modelBuilder.Entity("eTickets.Models.Models.Actor_Movie", b =>
