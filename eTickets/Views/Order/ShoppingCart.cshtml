@@ -1,0 +1,53 @@
+﻿@using eTickets.DataModel.DataModelVM
+@model ShoppingCartVM
+
+
+<div class="row">
+    <div class="col-md-8 offset-1">
+        <div class="text-center">
+            <h2> Your Shopping Cart Summary</h2>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> Selected Amount</th>
+                    <th> Movie</th>
+                    <th> Price </th>
+                    <th> Subtotal </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.ShoppingCart.Items)
+                {
+                    <tr>
+                        <td class="align-middle"> @item.Amount </td>
+                        <td class="align-middle"> @item.Movie.Name </td>
+                        <td class="align-middle"> @item.Movie.Price.ToString("c") </td>
+                        <td class="align-middle"> @((item.Amount * item.Movie.Price).ToString("c")) </td>
+                        <td class="align-middle"> 
+                            <a class="text-danger" asp-asp-controller="Order" asp-action="RemoveFromCart" asp-route-id="@item.Movie.Id">
+                                <i class="bg-info bi-cart-dash"></i>
+                            </a>
+                            <a class="text-success" asp-asp-controller="Order" asp-action="AddToCart" asp-route-id="@item.Movie.Id">
+                                <i class="bg-info bi-cart-plus"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+
+                    </td>
+                    <td><b>Total:</b></td>
+                    <td> @Model.ShoppingCartItemTotal.ToString("c")</td>.
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+
+    </div>
+</div>

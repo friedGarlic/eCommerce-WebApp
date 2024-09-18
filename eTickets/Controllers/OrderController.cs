@@ -1,6 +1,7 @@
 ﻿using eTickets.DataAccess.Data;
 using eTickets.DataAccess.Services.Interfaces;
-using eTickets.Models.ViewModels;
+using eTickets.DataModel;
+using eTickets.DataModel.DataModelVM;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTickets.Controllers
@@ -18,7 +19,7 @@ namespace eTickets.Controllers
             _shoppingCart = shoppingCart;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ShoppingCart()
         {
             var getAllItems = await _shoppingCart.GetShoppingCartItems();
             _shoppingCart.Items = getAllItems;
@@ -30,5 +31,7 @@ namespace eTickets.Controllers
 
             return View(response);
         }
+
+        
     }
 }

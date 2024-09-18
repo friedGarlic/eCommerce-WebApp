@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eTickets.Models.ViewModels
+namespace eTickets.DataModel.DataModelVM
 {
     public class ShoppingCartVM
     {

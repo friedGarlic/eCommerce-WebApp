@@ -4,7 +4,7 @@ using eTickets.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace eTickets.Controllers
+namespace eTickets.DataModel
 {
     public class ShoppingCart
     {
@@ -16,6 +16,20 @@ namespace eTickets.Controllers
         public ShoppingCart(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public static ShoppingCart GetShoppingCart(IServiceProvider serviceProvider)
+        {
+            ISession session = serviceProvider.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            var context = serviceProvider.GetService<ApplicationDbContext>();
+
+
+            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+            session.SetString("CartId", cartId);
+
+            return new ShoppingCart(context) { 
+                ShoppingCartId = cartId,
+            };
         }
 
         public async Task AddItemToCart(Movie movie)
@@ -68,7 +82,9 @@ namespace eTickets.Controllers
             if (Items != null)
             {
                 //EAGER loading
-                Items = await _dbContext.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).Include(n => n.Movie).ToListAsync();
+                Items = await _dbContext.ShoppingCartItems
+                    .Where(n => n.ShoppingCartId == ShoppingCartId)
+                    .Include(n => n.Movie).ToListAsync();
             }
 
             return Items;
