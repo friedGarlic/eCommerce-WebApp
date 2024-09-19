@@ -34,7 +34,7 @@ namespace eTickets.DataModel
 
         public async Task AddItemToCart(Movie movie)
         {
-            var shoppingCartItem = await _dbContext.ShoppingCartItems.FirstOrDefaultAsync(n => n.Id == movie.Id &&
+            var shoppingCartItem = await _dbContext.ShoppingCartItems.FirstOrDefaultAsync(n => n.Movie.Id == movie.Id &&
             n.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem == null)
@@ -58,10 +58,10 @@ namespace eTickets.DataModel
 
         public async Task RemoveItemFromCart(Movie movie)
         {
-            var shoppingCartItem = await _dbContext.ShoppingCartItems.FirstOrDefaultAsync(n => n.Id == movie.Id &&
+            var shoppingCartItem = await _dbContext.ShoppingCartItems.FirstOrDefaultAsync(n => n.Movie.Id == movie.Id &&
             n.ShoppingCartId == ShoppingCartId);
 
-            if (shoppingCartItem == null)
+            if (shoppingCartItem != null)
             {
                 if (shoppingCartItem.Amount > 1)
                 {
@@ -79,7 +79,7 @@ namespace eTickets.DataModel
 
         public async Task<List<ShoppingCartItem>> GetShoppingCartItems()
         {
-            if (Items != null)
+            if (Items == null)
             {
                 //EAGER loading
                 Items = await _dbContext.ShoppingCartItems

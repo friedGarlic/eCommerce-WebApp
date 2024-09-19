@@ -37,7 +37,7 @@
                         <div class="card-img box mb-1">
                             <img src="@item.ImageUrl" class="Image-Size" />
                             <p> @item.Cinema.Name</p>
-                            <a class="btn-primary"> <i class="bi bi-cart-plus">ToCart</i></a>
+                            <a class="btn-primary" asp-controller="Order" asp-action="AddToCart" asp-route-id="@item.Id"> <i class="bi bi-cart-plus">ToCart</i></a>
                             <a class="btn-secondary" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-info-circle">Details</i></a>
                         </div>
 
