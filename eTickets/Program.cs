@@ -13,6 +13,7 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 
 builder.Services.AddSession();
