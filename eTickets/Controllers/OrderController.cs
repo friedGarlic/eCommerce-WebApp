@@ -3,6 +3,7 @@ using eTickets.DataAccess.Services.Interfaces;
 using eTickets.DataModel;
 using eTickets.DataModel.DataModelVM;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
@@ -34,6 +35,17 @@ namespace eTickets.Controllers
             };
 
             return View(response);
+        }
+
+        public IActionResult Index()
+        {
+            //TODO dont forget to filter using user id, when identity is implemented
+            //also use the orderservice method of getting the orders by id
+            var getOrderList = _dbContext.Orders
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Movie).ToList();
+             
+            return View(getOrderList);
         }
 
         public async Task<RedirectToActionResult> AddToCart(int id)

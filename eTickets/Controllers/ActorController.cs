@@ -31,10 +31,10 @@ namespace eTickets.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("FullName, ProfilePictureUrl, Bio")]Actor actor)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(actor);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
 
             await _actorServ.Add(actor);
 
@@ -60,6 +60,11 @@ namespace eTickets.Controllers
             if (getActor == null)
             {
                 return View("NotFound");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(getActor);
             }
 
             return View(getActor);

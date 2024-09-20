@@ -38,15 +38,25 @@ namespace eTickets.Controllers
             ViewBag.Cinemas = new SelectList(getDropdown.Cinemas, "Id", "Name");
             ViewBag.Actors = new SelectList(getDropdown.Actors, "Id", "FullName");
             ViewBag.Producers = new SelectList(getDropdown.Producers, "Id", "FullName");
-
+            
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(MovieVM newMovieModel)
         {
-            await _service.CreateMovie(newMovieModel);
+            if (!ModelState.IsValid)
+            {
+                var getDropdown = await _service.GetDropDownValues();
+                ViewBag.Cinemas = new SelectList(getDropdown.Cinemas, "Id", "Name");
+                ViewBag.Actors = new SelectList(getDropdown.Actors, "Id", "FullName");
+                ViewBag.Producers = new SelectList(getDropdown.Producers, "Id", "FullName");
 
+                return View(newMovieModel);
+            }
+
+            await _service.CreateMovie(newMovieModel);
+            
             return RedirectToAction("Movies");
         }
 

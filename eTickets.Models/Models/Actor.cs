@@ -21,6 +21,6 @@ namespace eTickets.Models
         [Display(Name = "Actor Biography")]
         public string Bio {  get; set; }
 
-        public List<Actor_Movie> Actor_Movies { get; set; }
+        public List<Actor_Movie>? Actor_Movies { get; set; }
     }
 }
