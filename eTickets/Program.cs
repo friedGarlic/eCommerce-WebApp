@@ -49,6 +49,6 @@ app.MapControllerRoute(
     pattern: "{controller=Movie}/{action=Movies}/{id?}");
 
 //seed database
-ApplicationDBInitializer.Seed(app);
+//ApplicationDBInitializer.Seed(app);
 
 app.Run();

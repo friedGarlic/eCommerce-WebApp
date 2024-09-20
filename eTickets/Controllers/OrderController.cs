@@ -11,12 +11,16 @@ namespace eTickets.Controllers
         private readonly ApplicationDbContext _dbContext;
         private readonly IMovieService _movieService;
         private readonly ShoppingCart _shoppingCart;
+        private readonly IOrderService _orderService;
 
-        public OrderController(ApplicationDbContext dbContext, IMovieService movieService, ShoppingCart shoppingCart)
+        public OrderController(ApplicationDbContext dbContext
+            ,IMovieService movieService
+            ,ShoppingCart shoppingCart, IOrderService orderService)
         {
             _dbContext = dbContext;
             _movieService = movieService;
             _shoppingCart = shoppingCart;
+            _orderService = orderService;
         }
 
         public async Task<IActionResult> ShoppingCart()
@@ -55,5 +59,18 @@ namespace eTickets.Controllers
 
             return RedirectToAction(nameof(ShoppingCart));
         }
+
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = await _shoppingCart.GetShoppingCartItems();
+            string userId = "";
+            string userEmail = "";
+
+            await _orderService.StoreOrder(items,userId,userEmail);
+            await _shoppingCart.ClearShoppingCartAsync();
+             
+            return View("CompleteOrder");
+        }
+
     }
 }

@@ -41,6 +41,7 @@ namespace eTickets.Models.ViewModels
         [Required(ErrorMessage = "Please select a ProducerId")]
         public int ProducerId { get; set; }
 
+        [Required(ErrorMessage ="Select at least 1 actor")]
         public List<int> ActorIds { get; set; }
 
     }

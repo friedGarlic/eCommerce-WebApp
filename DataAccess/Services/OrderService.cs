@@ -37,6 +37,7 @@ namespace eTickets.DataAccess.Services
                 UserId = userId,
                 Email = userEmailAddress,
             };
+
             await _dbContext.Orders.AddAsync(order);
             await _dbContext.SaveChangesAsync();
 

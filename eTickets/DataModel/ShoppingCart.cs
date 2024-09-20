@@ -69,7 +69,7 @@ namespace eTickets.DataModel
                 }
                 else
                 {
-                    _dbContext.Remove(movie);
+                    _dbContext.Remove(shoppingCartItem);
 
                     await _dbContext.SaveChangesAsync();
                 }
@@ -98,6 +98,16 @@ namespace eTickets.DataModel
                 .Sum();
 
             return total;
+        }
+
+        public async Task ClearShoppingCartAsync()
+        {
+            var items = await _dbContext.ShoppingCartItems
+                    .Where(n => n.ShoppingCartId == ShoppingCartId)
+                    .ToListAsync();
+
+            _dbContext.ShoppingCartItems.RemoveRange(items);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
