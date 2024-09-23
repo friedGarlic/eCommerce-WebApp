@@ -101,7 +101,9 @@ namespace eTickets.Controllers
 
             if (filterString != null)
             {
-                var filteredMovies = allMovies.Where(n => n.Name.ToLower().Contains(filterString.ToLower()) || n.Description.Contains(filterString));
+                var filteredMovies = allMovies.Where(
+                        n => n.Name.ToLower().Contains(filterString.ToLower()) || n.Description.Contains(filterString)
+                );
 
                 return View(nameof(Movies), filteredMovies);
             }
