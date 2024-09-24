@@ -120,19 +120,22 @@ namespace eTickets.DataAccess.Data
 
         public static async Task SeedUserAndRoleAsync(IApplicationBuilder builder)
         {
-            using(var servicescope = builder.ApplicationServices.CreateScope())
+            using (var servicescope = builder.ApplicationServices.CreateScope())
             {
                 var roleManager = servicescope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 //Create Roles
-                if (await roleManager.RoleExistsAsync(UserRole.Admin)){
+                if (await roleManager.RoleExistsAsync(UserRole.Admin) == true)
+                {
                     await roleManager.CreateAsync(new IdentityRole(UserRole.Admin));
                 }
 
-                if (await roleManager.RoleExistsAsync(UserRole.User)){
+                if (await roleManager.RoleExistsAsync(UserRole.User) == true)
+                {
                     await roleManager.CreateAsync(new IdentityRole(UserRole.User));
                 }
 
+                //Admin Creation
                 var userManager = servicescope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
                 var adminUser = await userManager.FindByEmailAsync("admin@etickets.com");
@@ -140,15 +143,32 @@ namespace eTickets.DataAccess.Data
                 if (adminUser != null)
                 {
                     var adminuser = new AppUser()
-                    { 
+                    {
                         FullName = "Admin",
                         UserName = "admin",
                         Email = "admin@etickets.com",
                         EmailConfirmed = true
                     };
 
-                    await userManager.CreateAsync(adminuser, "k2XWkBYR@");
-                    await userManager.AddToRoleAsync(adminuser, UserRole.User);
+                    await userManager.CreateAsync(adminuser, "admin@");
+                    await userManager.AddToRoleAsync(adminuser, UserRole.Admin);
+                }
+
+                //First user creation
+                var appUser = await userManager.FindByEmailAsync("user@etickets.com");
+
+                if (appUser != null)
+                {
+                    var adminuser = new AppUser()
+                    {
+                        FullName = "appUser",
+                        UserName = "appUser",
+                        Email = "appUser@etickets.com",
+                        EmailConfirmed = true
+                    };
+
+                    await userManager.CreateAsync(appUser, "user@");
+                    await userManager.AddToRoleAsync(appUser, UserRole.User);
                 }
             }
         }
